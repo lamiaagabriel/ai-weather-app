@@ -20,15 +20,17 @@ export const ChatGPTMessage = forwardRef<
     className="grid place-content-center place-items-center text-card-foreground py-10 lg:py-0"
     {...props}
   >
-    <Image
-      className={`w-12 h-12 object-center object-cover mb-5 ${
-        isLoading ? "animate-bounce" : ""
-      }`}
-      src="/chat-gpt-icon.png"
-      alt="ChatGPT icon"
-      width={10000}
-      height={10000}
-    />
+    <div className="w-12 h-12 mb-5">
+      <Image
+        className={`w-full h-full object-center object-cover ${
+          isLoading ? "animate-bounce" : ""
+        }`}
+        src="/chat-gpt-icon.png"
+        alt="ChatGPT icon"
+        width={10000}
+        height={10000}
+      />
+    </div>
     <AlertTitle>ChatGPT</AlertTitle>
     <AlertDescription>{message}</AlertDescription>
   </Alert>
