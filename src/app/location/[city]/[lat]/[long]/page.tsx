@@ -316,7 +316,7 @@ const Location = async ({ params: { city, lat, long } }: Props) => {
               </Paragraph>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
               <Suspense
                 fallback={
                   <ChatGPTMessage
@@ -329,7 +329,7 @@ const Location = async ({ params: { city, lat, long } }: Props) => {
                 <ChatGPT data={data} city={city} />
               </Suspense>
 
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {highlightCards.map((props, i) => (
                   <HighlightCard key={i} {...props} />
                 ))}
@@ -339,7 +339,7 @@ const Location = async ({ params: { city, lat, long } }: Props) => {
         </div>
 
         <div>
-          <div className="container grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="container grid grid-cols-1 xl:grid-cols-2 gap-4">
             <TempChart data={data} />
             <HumidityChart data={data} />
             {/* <RainChart data={data} /> */}

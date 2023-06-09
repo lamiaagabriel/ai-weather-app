@@ -17,7 +17,7 @@ export const ChatGPTMessage = forwardRef<
   }
 >(({ message, isLoading = false, ...props }, ref) => (
   <Alert
-    className="grid place-content-center place-items-center text-card-foreground py-10 lg:py-0"
+    className="grid place-content-center place-items-center text-card-foreground py-10"
     {...props}
   >
     <div className="w-12 h-12 mb-5">
