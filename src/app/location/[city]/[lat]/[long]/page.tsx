@@ -8,16 +8,7 @@ import { notFound } from "next/navigation"
 import { client } from "@/graphql"
 import { GET_QUERY } from "@/graphql/queries"
 import { CategoryBar } from "@tremor/react"
-import {
-  ArrowDown,
-  ArrowUp,
-  ChevronDown,
-  ChevronUp,
-  MapPin,
-  Pin,
-  Sunrise,
-  Sunset,
-} from "lucide-react"
+import { ArrowDown, ArrowUp, MapPin } from "lucide-react"
 
 import {
   getDailyState,
@@ -27,22 +18,14 @@ import {
 } from "@/lib/utils"
 
 import { H1, H3, Paragraph } from "@/ui/typography"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/ui/card"
 
 import { CityPicker } from "@/components/city-picker"
 import TempChart from "@/components/temp-chart"
-import HighlightCard, { HighlightCardProps } from "@/components/HighlightCard"
+import HighlightCard, { HighlightCardProps } from "@/components/highlight-card"
 import RainChart from "@/components/rain-chart"
 import HumidityChart from "@/components/humidity-chart"
 import { Suspense } from "react"
-import ChatGPT from "@/components/chat-gpt"
+import ChatGPT, { ChatGPTMessage } from "@/components/chat-gpt"
 
 type Props = {
   params: { city: string; lat: string; long: string }
@@ -66,7 +49,7 @@ const Location = async ({ params: { city, lat, long } }: Props) => {
     })
 
   if (!data) return notFound()
-  const daily = getDailyState(data)
+  // const daily = getDailyState(data)
 
   const highlightCards: HighlightCardProps[] = [
     {
@@ -334,9 +317,16 @@ const Location = async ({ params: { city, lat, long } }: Props) => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Suspense fallback={<>loading ChatGPT...</>}>
+              <Suspense
+                fallback={
+                  <ChatGPTMessage
+                    message="Getting a summary of weather from ChatGPT..."
+                    isLoading={true}
+                  />
+                }
+              >
                 {/* @ts-expect-error Server Components */}
-                <ChatGPT />
+                <ChatGPT data={data} city={city} />
               </Suspense>
 
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">

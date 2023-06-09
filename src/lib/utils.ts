@@ -1,5 +1,4 @@
 import { ClassValue, clsx } from "clsx"
-import { Diamond } from "lucide-react"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -7,21 +6,18 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const fetcher = async (
-  url: string,
-  values?: RequestInit | undefined
+  url: RequestInfo | URL,
+  options: RequestInit | undefined
 ) => {
-  return await fetch(`http://localhost:3000/api${url}`, values)
-
-  // .then((res) =>
-  //   res.json()
-  // )
+  return await fetch(
+    `${
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : `https://${process.env.VERCEL_URL}`
+    }/api${url}`,
+    options
+  ).then((res) => res.json())
 }
-
-// ${
-//     process.env.NODE_ENV === "development"
-//       ? "http://localhost:3000"
-//       : `https://${process.env.VERCEL_URL}`
-//   }
 
 export const cleanData = (data: Root, city: string) => {
   const {
